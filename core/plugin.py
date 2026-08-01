@@ -21,3 +21,8 @@ class Plugin(ABC):
     @abstractmethod
     def register(self):
         pass
+    
+    @abstractmethod
+    def register_commands(self, registry):
+        """Register plugin commands."""
+        pass

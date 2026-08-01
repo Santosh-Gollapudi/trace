@@ -1,3 +1,12 @@
+from shell.registry import CommandRegistry
+from shell.parser import parse
+from shell.commands import (
+    HelpCommand,
+    VersionCommand,
+    StatusCommand,
+    PluginsCommand,
+)
+
 class Shell:
 
     def __init__(self, core):
@@ -18,11 +27,17 @@ class Shell:
             "status",
             StatusCommand()
         )
+        
+        self.registry.register(
+            "plugins",
+            PluginsCommand(core)
+        )
+
+        for plugin in core.plugins.get_plugins():
+            plugin.register_commands(self.registry)
 
     def run(self):
 
         while True:
-
             command = parse(input("jarvis> "))
-
             self.registry.execute(command)

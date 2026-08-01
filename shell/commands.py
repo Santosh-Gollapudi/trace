@@ -32,3 +32,17 @@ class ExitCommand(BaseCommand):
 
     def execute(self, command):
         raise SystemExit
+    
+class PluginsCommand(BaseCommand):
+
+    def __init__(self, core):
+        self.core = core
+
+    def execute(self, command):
+
+        plugins = self.core.services.plugins.list_plugins()
+
+        print("\nLoaded Plugins:\n")
+
+        for plugin in plugins:
+            print(f"- {plugin.name} v{plugin.version}")

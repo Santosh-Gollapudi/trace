@@ -41,5 +41,7 @@ class PluginManager:
                     self.plugins.append(plugin)
 
     def list_plugins(self):
-
+        return self.plugins
+    
+    def get_plugins(self):
         return self.plugins
