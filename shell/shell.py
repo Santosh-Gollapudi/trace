@@ -5,6 +5,10 @@ from shell.commands import (
     VersionCommand,
     StatusCommand,
     PluginsCommand,
+    PwdCommand,
+    LsCommand,
+    ExistsCommand,
+    CdCommand,
 )
 
 class Shell:
@@ -35,9 +39,30 @@ class Shell:
 
         for plugin in core.plugins.get_plugins():
             plugin.register_commands(self.registry)
+        self.registry.register(
+            "pwd",
+            PwdCommand(core.services.system)
+        )
+
+        self.registry.register(
+            "ls",
+            LsCommand(core.services.system)
+        )
+
+        self.registry.register(
+            "exists",
+            ExistsCommand(core.services.system)
+        )
+
+        self.registry.register(
+            "cd",
+            CdCommand(core.services.system)
+        )
 
     def run(self):
 
         while True:
             command = parse(input("jarvis> "))
             self.registry.execute(command)
+            
+    

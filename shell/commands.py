@@ -46,3 +46,49 @@ class PluginsCommand(BaseCommand):
 
         for plugin in plugins:
             print(f"- {plugin.name} v{plugin.version}")
+            
+class PwdCommand(BaseCommand):
+
+    def __init__(self, system_service):
+        self.system = system_service
+
+    def execute(self, command):
+        print(self.system.pwd())
+        
+class LsCommand(BaseCommand):
+
+    def __init__(self, system_service):
+        self.system = system_service
+
+    def execute(self, command):
+        for item in self.system.ls():
+            print(item.name)
+
+class ExistsCommand(BaseCommand):
+
+    def __init__(self, system_service):
+        self.system = system_service
+
+    def execute(self, command):
+
+        if not command.args:
+            print("Usage: exists <file>")
+            return
+
+        print(self.system.exists(command.args[0]))
+        
+class CdCommand(BaseCommand):
+
+    def __init__(self, system_service):
+        self.system = system_service
+
+    def execute(self, command):
+
+        if not command.args:
+            print("Usage: cd <directory>")
+            return
+
+        if not self.system.cd(command.args[0]):
+            print("Directory not found.")
+            
+    
