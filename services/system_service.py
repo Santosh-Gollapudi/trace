@@ -25,3 +25,32 @@ class SystemService(BaseService):
             return True
         return False
     
+    def mkdir(self, name):
+
+        path = self.current_directory / name
+        path.mkdir(exist_ok=True)
+        
+    def touch(self, name):
+
+        path = self.current_directory / name
+        path.touch(exist_ok=True)
+        
+    def cat(self, name):
+
+        path = self.current_directory / name
+
+        if not path.exists():
+            return None
+
+        return path.read_text(encoding="utf-8")
+
+    def write(self, filename, text):
+        file = self.current_directory / filename
+        file.write_text(text, encoding="utf-8")
+        
+    def append(self, filename, text):
+
+        file = self.current_directory / filename
+
+        with open(file, "a", encoding="utf-8") as f:
+            f.write(text + "\n")

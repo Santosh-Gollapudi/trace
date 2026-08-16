@@ -1,7 +1,10 @@
 from shell.registry import CommandRegistry
 from shell.parser import parse
 from shell.commands import (
+    AppendCommand,
+    ExitCommand,
     HelpCommand,
+    MkdirCommand,
     VersionCommand,
     StatusCommand,
     PluginsCommand,
@@ -9,6 +12,13 @@ from shell.commands import (
     LsCommand,
     ExistsCommand,
     CdCommand,
+    MkdirCommand,
+    TouchCommand,
+    CatCommand,
+    ExitCommand,
+    WriteCommand,
+    AppendCommand
+    
 )
 
 class Shell:
@@ -58,6 +68,34 @@ class Shell:
             "cd",
             CdCommand(core.services.system)
         )
+        
+        self.registry.register(
+            "mkdir",
+            MkdirCommand(core.services.system)
+        )
+
+        self.registry.register(
+            "touch",
+            TouchCommand(core.services.system)
+        )
+
+        self.registry.register(
+            "cat",
+            CatCommand(core.services.system)
+        )
+      
+        self.registry.register(
+            "exit",
+            ExitCommand()
+        )
+        self.registry.register(
+            "write",
+            WriteCommand(core.services.system)
+        )
+        self.registry.register(
+            "append",
+            AppendCommand(core.services.system)
+)
 
     def run(self):
 
@@ -65,4 +103,3 @@ class Shell:
             command = parse(input("jarvis> "))
             self.registry.execute(command)
             
-    
