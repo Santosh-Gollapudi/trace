@@ -1,4 +1,4 @@
-# JARVIS Roadmap
+# TRACE Roadmap
 
 ## Phase 1 - Foundation
 - [x] Core
@@ -33,7 +33,7 @@
 - [ ] Gemini
 - [ ] Claude
 
-## Phase 5 - JARVIS OS
+## Phase 5 - TRACE OS
 - [ ] Voice
 - [ ] GUI
 - [ ] Linux Daemon

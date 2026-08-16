@@ -1,5 +1,5 @@
 """
-JARVIS AI Assistant
+TRACE AI Assistant
 -------------------
 Configuration loader.
 """

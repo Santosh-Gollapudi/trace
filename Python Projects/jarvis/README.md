@@ -1,4 +1,4 @@
-# JARVIS
+# TRACE
 
 A modular AI assistant designed to run locally and in the cloud.
 

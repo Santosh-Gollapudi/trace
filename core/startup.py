@@ -1,5 +1,5 @@
 """
-JARVIS AI Assistant
+TRACE AI Assistant
 -------------------
 Startup screen.
 """
@@ -13,7 +13,7 @@ class StartupScreen:
     """Displays startup information."""
 
     def show_banner(self):
-        console.rule("[bold cyan]JARVIS AI[/bold cyan]")
+        console.rule("[bold cyan]TRACE AI[/bold cyan]")
 
     def status(self, component: str):
         console.print(f"[green]✓[/green] {component}")

@@ -1,5 +1,5 @@
 """
-JARVIS AI Assistant
+TRACE AI Assistant
 -------------------
 Logging configuration.
 """
@@ -10,7 +10,7 @@ from pathlib import Path
 Path("logs").mkdir(exist_ok=True)
 
 logger.add(
-    "logs/jarvis.log",
+    "logs/trace.log",
     rotation="5 MB",
     retention="10 days",
     level="INFO",

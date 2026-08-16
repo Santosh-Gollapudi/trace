@@ -100,6 +100,6 @@ class Shell:
     def run(self):
 
         while True:
-            command = parse(input("jarvis> "))
+            command = parse(input("trace> "))
             self.registry.execute(command)
             

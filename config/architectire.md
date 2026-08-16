@@ -1,8 +1,8 @@
-# JARVIS Architecture
+# TRACE Architecture
 
 ## Core
 
-JarvisCore is the central controller.
+TraceCore is the central controller.
 
 All modules communicate through the Core.
 

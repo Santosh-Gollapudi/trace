@@ -1,9 +1,9 @@
-from core.jarvis_core import JarvisCore
+from core.trace_core import TraceCore
 from shell.shell import Shell
 
 
 def main():
-    core = JarvisCore()
+    core = TraceCore()
     core.start()
 
     shell = Shell(core)

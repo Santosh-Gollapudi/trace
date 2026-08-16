@@ -1,5 +1,5 @@
 """
-JARVIS AI Assistant
+TRACE AI Assistant
 -------------------
 Main application core.
 """
@@ -11,7 +11,7 @@ from core.event_bus import EventBus
 from core.services import ServiceContainer
 
 
-class JarvisCore:
+class TraceCore:
     """Main controller."""
 
     def __init__(self):
@@ -21,14 +21,15 @@ class JarvisCore:
         self.events = EventBus()
 
     def start(self):
-        logger.info("Starting JARVIS...")
+        logger.info("Starting TRACE...")
 
         cfg = self.config.load()
 
         self.plugins.load_plugins()
 
-        self.events.publish("JARVIS_STARTED")
+        self.events.publish("TRACE_STARTED")
+
 
         print()
-        print("JARVIS is running.")
+        print("TRACE is running.")
         print(cfg)
