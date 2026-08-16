@@ -12,13 +12,9 @@ from shell.commands import (
     LsCommand,
     ExistsCommand,
     CdCommand,
-    MkdirCommand,
     TouchCommand,
     CatCommand,
-    ExitCommand,
-    WriteCommand,
-    AppendCommand
-    
+    WriteCommand,    
 )
 
 class Shell:
@@ -53,35 +49,33 @@ class Shell:
             "pwd",
             PwdCommand(core.services.system)
         )
-
-        self.registry.register(
-            "ls",
-            LsCommand(core.services.system)
-        )
-
-        self.registry.register(
-            "exists",
-            ExistsCommand(core.services.system)
-        )
-
         self.registry.register(
             "cd",
             CdCommand(core.services.system)
         )
-        
+        self.registry.register(
+            "ls",
+            LsCommand(core.services.filesystem)
+        )
+
+        self.registry.register(
+            "exists",
+            ExistsCommand(core.services.filesystem)
+        )
+
         self.registry.register(
             "mkdir",
-            MkdirCommand(core.services.system)
+            MkdirCommand(core.services.filesystem)
         )
 
         self.registry.register(
             "touch",
-            TouchCommand(core.services.system)
+            TouchCommand(core.services.filesystem)
         )
 
         self.registry.register(
             "cat",
-            CatCommand(core.services.system)
+            CatCommand(core.services.filesystem)
         )
       
         self.registry.register(
@@ -90,11 +84,11 @@ class Shell:
         )
         self.registry.register(
             "write",
-            WriteCommand(core.services.system)
+            WriteCommand(core.services.filesystem)
         )
         self.registry.register(
             "append",
-            AppendCommand(core.services.system)
+            AppendCommand(core.services.filesystem)
 )
 
     def run(self):

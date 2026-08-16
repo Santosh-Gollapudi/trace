@@ -4,5 +4,9 @@ from abc import ABC, abstractmethod
 class SystemInterface(ABC):
 
     @abstractmethod
-    def execute(self, command: str):
+    def pwd(self):
+        pass
+
+    @abstractmethod
+    def cd(self, path):
         pass

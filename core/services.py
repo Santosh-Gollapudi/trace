@@ -2,7 +2,7 @@ from services.search_service import SearchService
 from services.memory_service import MemoryService
 from services.plugin_service import PluginService
 from services.system_service import SystemService
-
+from services.filesystem_service import FileSystemService
 
 class ServiceContainer:
 
@@ -12,3 +12,4 @@ class ServiceContainer:
         self.memory = MemoryService()
         self.plugins = PluginService(plugin_manager)
         self.system = SystemService()
+        self.filesystem = FileSystemService()
