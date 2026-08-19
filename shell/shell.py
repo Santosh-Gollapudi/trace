@@ -14,7 +14,9 @@ from shell.commands import (
     CdCommand,
     TouchCommand,
     CatCommand,
-    WriteCommand,    
+    WriteCommand,
+    IpCommand,
+    WifiCommand,
 )
 
 class Shell:
@@ -89,7 +91,15 @@ class Shell:
         self.registry.register(
             "append",
             AppendCommand(core.services.filesystem)
-)
+        )
+        self.registry.register(
+            "ip",
+            IpCommand(core.services.network)
+        )
+        self.registry.register(
+            "wifi",
+            WifiCommand(core.services.network)
+        )
 
     def run(self):
 

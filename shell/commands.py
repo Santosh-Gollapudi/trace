@@ -14,7 +14,6 @@ class HelpCommand(BaseCommand):
 
         print()
 
-
 class VersionCommand(BaseCommand):
 
     def __init__(self, core):
@@ -23,18 +22,15 @@ class VersionCommand(BaseCommand):
     def execute(self, command):
         print(self.core.config.get("app", "version"))
 
-
 class StatusCommand(BaseCommand):
 
     def execute(self, command):
         print("READY")
 
-
 class ExitCommand(BaseCommand):
 
     def execute(self, command):
         raise SystemExit
-
 
 class PluginsCommand(BaseCommand):
 
@@ -49,7 +45,6 @@ class PluginsCommand(BaseCommand):
         for plugin in plugins:
             print(f"- {plugin.name} v{plugin.version}")
 
-
 class PwdCommand(BaseCommand):
 
     def __init__(self, system_service):
@@ -57,7 +52,6 @@ class PwdCommand(BaseCommand):
 
     def execute(self, command):
         print(self.system.pwd())
-
 
 class CdCommand(BaseCommand):
 
@@ -73,7 +67,6 @@ class CdCommand(BaseCommand):
         if not self.system.cd(command.args[0]):
             print("Directory not found.")
 
-
 class LsCommand(BaseCommand):
 
     def __init__(self, filesystem):
@@ -82,7 +75,6 @@ class LsCommand(BaseCommand):
     def execute(self, command):
         for item in self.filesystem.list_directory("."):
             print(item.name)
-
 
 class ExistsCommand(BaseCommand):
 
@@ -97,7 +89,6 @@ class ExistsCommand(BaseCommand):
 
         print(self.filesystem.exists(command.args[0]))
 
-
 class MkdirCommand(BaseCommand):
 
     def __init__(self, filesystem):
@@ -111,7 +102,6 @@ class MkdirCommand(BaseCommand):
 
         self.filesystem.mkdir(command.args[0])
 
-
 class TouchCommand(BaseCommand):
 
     def __init__(self, filesystem):
@@ -124,7 +114,6 @@ class TouchCommand(BaseCommand):
             return
 
         self.filesystem.touch(command.args[0])
-
 
 class CatCommand(BaseCommand):
 
@@ -145,7 +134,6 @@ class CatCommand(BaseCommand):
 
         print(text)
 
-
 class WriteCommand(BaseCommand):
 
     def __init__(self, filesystem):
@@ -164,7 +152,6 @@ class WriteCommand(BaseCommand):
 
         print("File written successfully.")
 
-
 class AppendCommand(BaseCommand):
 
     def __init__(self, filesystem):
@@ -182,3 +169,29 @@ class AppendCommand(BaseCommand):
         self.filesystem.append(filename, text)
 
         print("Text appended.")
+        
+class IpCommand(BaseCommand):
+    name = "ip"
+    description = "Show the current IP address"
+    
+    def __init__(self, network_service):
+        self.network = network_service
+
+    def execute(self, args):
+        print(self.network.current_ip())
+        
+class WifiCommand(BaseCommand):
+    name = "wifi"
+    description = "Scan for available Wi-Fi networks"
+    
+    def __init__(self, network_service):
+        self.network = network_service
+
+    def execute(self, args):
+        networks = self.network.scan_wifi()
+        if not networks:
+            print("No Wi-Fi networks found.")
+        else:
+            print("Available Wi-Fi networks:")
+            for network in networks:
+                print(f"- {network}")

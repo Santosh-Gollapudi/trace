@@ -1,12 +1,12 @@
-from abc import ABC, abstractmethod
+import socket
+from interfaces.network import NetworkInterface
 
 
-class NetworkInterface(ABC):
+class LinuxNetwork(NetworkInterface):
 
-    @abstractmethod
     def scan_wifi(self):
-        pass
+        return []
 
-    @abstractmethod
     def current_ip(self):
-        pass
+        hostname = socket.gethostname()
+        return socket.gethostbyname(hostname)
