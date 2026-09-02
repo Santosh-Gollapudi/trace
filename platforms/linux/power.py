@@ -1,12 +1,28 @@
-from abc import ABC, abstractmethod
+from pathlib import Path
+import subprocess
+
+from interfaces.power import PowerInterface
 
 
-class PowerInterface(ABC):
+class LinuxPower(PowerInterface):
 
-    @abstractmethod
     def battery(self):
-        pass
+        batteries = list(Path("/sys/class/power_supply").glob("BAT*/capacity"))
 
-    @abstractmethod
+        if not batteries:
+            return "No battery detected."
+
+        try:
+            value = batteries[0].read_text().strip()
+            return f"{value}%"
+        except OSError:
+            return "Unable to read battery status."
+
     def shutdown(self):
-        pass
+        result = subprocess.run(
+            ["systemctl", "poweroff"],
+            capture_output=True,
+            text=True
+        )
+
+        return result.returncode == 0

@@ -206,3 +206,13 @@ class ProcessesCommand(BaseCommand):
     def execute(self, args):
         output = self.process.list_processes()
         print(output)
+        
+class BatteryCommand(BaseCommand):
+    name = "battery"
+    description = "Show battery status"
+
+    def __init__(self, power_service):
+        self.power = power_service
+
+    def execute(self, args):
+        print(self.power.battery())

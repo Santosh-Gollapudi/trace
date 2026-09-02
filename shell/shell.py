@@ -18,6 +18,7 @@ from shell.commands import (
     IpCommand,
     WifiCommand,
     ProcessesCommand,
+    BatteryCommand,
 )
 
 class Shell:
@@ -104,6 +105,10 @@ class Shell:
         self.registry.register(
             "ps",
             ProcessesCommand(core.services.process)
+        )
+        self.registry.register(
+            "battery",
+            BatteryCommand(core.services.power)
         )
         
     def run(self):

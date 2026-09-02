@@ -5,6 +5,7 @@ from services.system_service import SystemService
 from services.filesystem_service import FileSystemService
 from services.network_service import NetworkService
 from services.process_service import ProcessService
+from services.power_service import PowerService
 
 class ServiceContainer:
 
@@ -17,3 +18,5 @@ class ServiceContainer:
         self.filesystem = FileSystemService()
         self.network = NetworkService()
         self.process = ProcessService()
+        self.power = PowerService()
+        self.network = NetworkService()

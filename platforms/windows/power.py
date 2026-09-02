@@ -1,12 +1,36 @@
-from abc import ABC, abstractmethod
+import subprocess
+
+from interfaces.power import PowerInterface
 
 
-class PowerInterface(ABC):
+class WindowsPower(PowerInterface):
 
-    @abstractmethod
     def battery(self):
-        pass
+        result = subprocess.run(
+            [
+                "powershell",
+                "-Command",
+                "(Get-CimInstance Win32_Battery).EstimatedChargeRemaining"
+            ],
+            capture_output=True,
+            text=True
+        )
 
-    @abstractmethod
+        if result.returncode != 0:
+            return "Unable to read battery status."
+
+        value = result.stdout.strip()
+
+        if not value:
+            return "No battery detected."
+
+        return f"{value}%"
+
     def shutdown(self):
-        pass
+        result = subprocess.run(
+            ["shutdown", "/s", "/t", "0"],
+            capture_output=True,
+            text=True
+        )
+
+        return result.returncode == 0

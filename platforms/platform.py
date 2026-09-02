@@ -7,6 +7,8 @@ from platforms.linux.system import LinuxSystem
 from platforms.linux.filesystem import LinuxFileSystem
 from platforms.windows.process import WindowsProcess
 from platforms.linux.process import LinuxProcess
+from platforms.windows.power import WindowsPower
+from platforms.linux.power import LinuxPower
 
 
 def get_system():
@@ -50,5 +52,16 @@ def get_process():
 
     if system == "Linux":
         return LinuxProcess()
+
+    raise RuntimeError(f"Unsupported platform: {system}")
+
+def get_power():
+    system = platform.system()
+
+    if system == "Windows":
+        return WindowsPower()
+
+    if system == "Linux":
+        return LinuxPower()
 
     raise RuntimeError(f"Unsupported platform: {system}")
