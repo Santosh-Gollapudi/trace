@@ -216,3 +216,73 @@ class BatteryCommand(BaseCommand):
 
     def execute(self, args):
         print(self.power.battery())
+
+class PackageCommand(BaseCommand):
+
+    name = "package"
+    description = "Manage system packages"
+
+    def __init__(self, package_service):
+        self.package = package_service
+
+    def execute(self, command):
+        if len(command.args) < 2:
+            print("Usage: package <install|remove> <package>")
+            return
+
+        action = command.args[0].lower()
+        package = command.args[1]
+
+        if action == "install":
+            print(f'Install "{package}"? [y/N]: ', end="")
+            confirmation = input().strip().lower()
+
+            if confirmation != "y":
+                print("Cancelled.")
+                return
+
+            result = self.package.install(package)
+
+            if result["status"] == "installed":
+                print("Package installed successfully.")
+
+            elif result["status"] == "already_installed":
+                print("Package is already installed and no update is available.")
+
+            elif result["status"] == "not_found":
+                print("Package not found.")
+
+            else:
+                print("Package installation failed.")
+
+            if result["output"]:
+                print(result["output"])
+            if result["error"]:
+                print(result["error"])
+
+        elif action == "remove":
+            print(f'Remove "{package}"? [y/N]: ', end="")
+            confirmation = input().strip().lower()
+
+            if confirmation != "y":
+                print("Cancelled.")
+                return
+
+            result = self.package.remove(package)
+
+            if result["status"] == "removed":
+                print("Package removed successfully.")
+
+            elif result["status"] == "not_found":
+                print("Package is not installed.")
+
+            else:
+                print("Package removal failed.")
+
+            if result["output"]:
+                print(result["output"])
+            if result["error"]:
+                print(result["error"])
+
+        else:
+            print("Usage: package <install|remove> <package>")

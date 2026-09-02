@@ -6,6 +6,7 @@ from services.filesystem_service import FileSystemService
 from services.network_service import NetworkService
 from services.process_service import ProcessService
 from services.power_service import PowerService
+from services.package_service import PackageService
 
 class ServiceContainer:
 
@@ -19,4 +20,4 @@ class ServiceContainer:
         self.network = NetworkService()
         self.process = ProcessService()
         self.power = PowerService()
-        self.network = NetworkService()
+        self.package = PackageService()

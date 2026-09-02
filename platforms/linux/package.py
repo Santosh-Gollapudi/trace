@@ -1,12 +1,24 @@
-from abc import ABC, abstractmethod
+import subprocess
+
+from interfaces.package import PackageInterface
 
 
-class PackageInterface(ABC):
+class LinuxPackage(PackageInterface):
 
-    @abstractmethod
     def install(self, package):
-        pass
+        result = subprocess.run(
+            ["sudo", "apt", "install", "-y", package],
+            capture_output=True,
+            text=True
+        )
 
-    @abstractmethod
+        return result.returncode == 0
+
     def remove(self, package):
-        pass
+        result = subprocess.run(
+            ["sudo", "apt", "remove", "-y", package],
+            capture_output=True,
+            text=True
+        )
+
+        return result.returncode == 0
