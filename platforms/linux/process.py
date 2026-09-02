@@ -1,12 +1,24 @@
-from abc import ABC, abstractmethod
+import subprocess
+
+from interfaces.process import ProcessInterface
 
 
-class ProcessInterface(ABC):
+class LinuxProcess(ProcessInterface):
 
-    @abstractmethod
     def list_processes(self):
-        pass
+        result = subprocess.run(
+            ["ps", "-e"],
+            capture_output=True,
+            text=True
+        )
 
-    @abstractmethod
+        return result.stdout
+
     def kill(self, pid):
-        pass
+        result = subprocess.run(
+            ["kill", str(pid)],
+            capture_output=True,
+            text=True
+        )
+
+        return result.returncode == 0

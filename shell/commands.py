@@ -195,3 +195,14 @@ class WifiCommand(BaseCommand):
             print("Available Wi-Fi networks:")
             for network in networks:
                 print(f"- {network}")
+                
+class ProcessesCommand(BaseCommand):
+    name = "ps"
+    description = "List running processes"
+
+    def __init__(self, process_service):
+        self.process = process_service
+
+    def execute(self, args):
+        output = self.process.list_processes()
+        print(output)

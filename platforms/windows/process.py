@@ -1,12 +1,24 @@
-from abc import ABC, abstractmethod
+import subprocess
+
+from interfaces.process import ProcessInterface
 
 
-class ProcessInterface(ABC):
+class WindowsProcess(ProcessInterface):
 
-    @abstractmethod
     def list_processes(self):
-        pass
+        result = subprocess.run(
+            ["tasklist"],
+            capture_output=True,
+            text=True
+        )
 
-    @abstractmethod
+        return result.stdout
+
     def kill(self, pid):
-        pass
+        result = subprocess.run(
+            ["taskkill", "/PID", str(pid), "/F"],
+            capture_output=True,
+            text=True
+        )
+
+        return result.returncode == 0

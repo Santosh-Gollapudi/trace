@@ -4,6 +4,8 @@ from services.plugin_service import PluginService
 from services.system_service import SystemService
 from services.filesystem_service import FileSystemService
 from services.network_service import NetworkService
+from services.process_service import ProcessService
+
 class ServiceContainer:
 
     def __init__(self, plugin_manager):
@@ -14,3 +16,4 @@ class ServiceContainer:
         self.system = SystemService()
         self.filesystem = FileSystemService()
         self.network = NetworkService()
+        self.process = ProcessService()

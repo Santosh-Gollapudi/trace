@@ -17,6 +17,7 @@ from shell.commands import (
     WriteCommand,
     IpCommand,
     WifiCommand,
+    ProcessesCommand,
 )
 
 class Shell:
@@ -100,7 +101,11 @@ class Shell:
             "wifi",
             WifiCommand(core.services.network)
         )
-
+        self.registry.register(
+            "ps",
+            ProcessesCommand(core.services.process)
+        )
+        
     def run(self):
 
         while True:

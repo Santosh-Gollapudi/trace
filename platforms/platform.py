@@ -5,6 +5,8 @@ from platforms.windows.system import WindowsSystem
 from platforms.windows.filesystem import WindowsFileSystem
 from platforms.linux.system import LinuxSystem
 from platforms.linux.filesystem import LinuxFileSystem
+from platforms.windows.process import WindowsProcess
+from platforms.linux.process import LinuxProcess
 
 
 def get_system():
@@ -37,5 +39,16 @@ def get_network():
 
     if system == "Linux":
         return LinuxNetwork()
+
+    raise RuntimeError(f"Unsupported platform: {system}")
+
+def get_process():
+    system = platform.system()
+
+    if system == "Windows":
+        return WindowsProcess()
+
+    if system == "Linux":
+        return LinuxProcess()
 
     raise RuntimeError(f"Unsupported platform: {system}")
